@@ -1,10 +1,17 @@
-const express = require('express');
+const dotenv = require("dotenv");
+dotenv.config();
+const mongoose = require("mongoose");
+const express = require("express");
+const port = 3000;
 const app = express();
-const port = 3002;
+const path = require("path");
 
-app.get('/', (req,res) => {
-  res.render('index.ejs')
-})
+//DATABASE CONNECTION
+mongoose.connect(process.env.MONGODB_URI);
+
+mongoose.connection.on("connected", () => {
+  console.log(`Conected to MongoDB${mongoose.connection.name}`);
+});
 
 app.get('/test', (req,res) => {
   res.send('hello not world!');
