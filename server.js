@@ -6,16 +6,26 @@ const port = 3000;
 const app = express();
 const path = require("path");
 
+// Controllers
+ const plantController = require('./controllers/plantController')
+
 //DATABASE CONNECTION
 mongoose.connect(process.env.MONGODB_URI);
-
-mongoose.connection.on("connected", () => {
-  console.log(`Conected to MongoDB${mongoose.connection.name}`);
+mongoose.connection.on('connected', () => {
+  console.log('Connected to MongoDB' + mongoose.connection.name);
 });
 
-app.get('/test', (req,res) => {
-  res.send('hello not world!');
-})
+// MiDDLEWARE
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({extended: false}));
+
+app.get('/', (req,res) => {
+  res.render('index.ejs')
+});
+
+
+
+app.use('/plants', plantController)
 
 app.listen(port, () => {
   console.log("WELCOME TO THE LAB");
