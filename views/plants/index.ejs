@@ -4,18 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Plants Index</title>
+  <link rel="stylesheet" href="stylesheet/style.css">
 </head>
 <body>
-  <h1>Plants Here</h1>
+    
+    <div class="index-header-div">
+      <h1>All Plants</h1>
+      <a class="add-plants" href="/plants/new">Add a plant</a>
+    </div>
 
-  <ul>
-   <% allPlants.forEach((plant) => { %>
-      <li><%=plant.name%></li>
-      <li><%=plant.category%></li>
-      <li><%=plant.description%></li>
-      <li><%=plant.website%></li>
-      <li><%=plant.location%></li>
-   <% }) %>
-  </ul>
+ 		<ul>
+			<% allPlants.forEach(plant => { %>
+			<li>
+				<h2>
+					<a href="/plants/<%=plant._id%>" target="_blank" ><%= plant.name %></a>
+          <% if (plant.isVerified) { %>
+            ✅ 
+          <% } %>
+				</h2>
+				<p><strong>Category:</strong> <%= plant.category %></p>
+				<p><strong>Description:</strong> <%= plant.description %></p>
+				<p><strong>Location:</strong> <%= plant.location %></p>
+				<% if (plant.website) { %>
+				<p>
+					<strong>Website:</strong>
+					<a href="<%= plant.website %>" target="_blank"
+						><%= plant.website %></a
+					>
+				</p>
+				<% } %>
+				<hr />
+			</li>
+			<% }) %>
+		</ul>
 </body>
 </html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="/stylesheets/style.css" />
+		<title>Edit <%= foundPlant.name %></title>
+	</head>
+	<body>
+  <!-- update the header -->
+  <h1>Edit <%= foundPlant.name %></h1>
+  <form action="/plants/<%=foundPlant._id%>?_method=PUT" method="POST">
+    <label for="name">Plant Name:</label>
+    <input type="text" value="<%=foundPlant.name %>" name="name" id="name" />
+
+    <label for="category">Category:</label>
+    <input type="text" name="category" id="category" value="<%=foundPlant.category %>" />
+
+    <label for="description">Description:</label>
+    <textarea name="description" id="description" rows="4"><%=foundPlant.description %></textarea>
+
+    <label for="location">Location:</label>
+    <input type="text" value="<%=foundPlant.location %>" name="location" id="location" />
+
+    <label for="website">Website:</label>
+    <input type="url" name="website" id="website" value="<%=foundPlant.website %>" />
+
+    <div class="checkbox-id">
+        <label for="isVerified">Verified Listing?</label>
+        <input type="checkbox"  name="isVerified" <% if (foundPlant.isVerified) { %>checked<% } %> />
+    </div>
+    <!-- update the button text -->
+    <button type="submit">Update plants</button>
+  </form>
+
+  <a class="plants-index-link" href="/plants">
+    <div class="index-link-text">Back to All plants</div>
+  </a>
+	</body>
+</html>

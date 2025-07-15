@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="stylesheet/style.css">
+    <title><%= foundPlant.name %></title> 
+  </head>
+  <body>
+		<h1><%= foundPlant.name %></h1>
+		<% if (foundPlant.isVerified) { %> ✅ Verified <% } %>
+
+		<p><strong>Category:</strong> <%= foundPlant.category %></p>
+
+		<p><strong>Description:</strong></p>
+		<p><%= foundPlant.description %></p>
+
+		<p><strong>Location:</strong> <%= foundPlant.location %></p>
+
+		<% if (foundPlant.website) { %>
+		<p>
+			<strong>Website:</strong>
+			<a href="<%= foundPlant.website %>" target="_blank">
+        <%= foundPlant.website %>
+      </a>
+		</p>
+		<% } %>
+        <a class="plants-index-link" href="/plants">
+        <div class="index-link-text">Back to All Plants</div>
+        </a>
+
+        <div class="actions">
+            <form class="delete-form" action="/plants/<%=foundPlant._id%>?_method=DELETE" method="POST">
+                <button class="delete-button" type="submit">Delete <%= foundPlant.name %></button>
+            </form>
+            <a class="edit-link" href="/plants/<%= foundPlant._id %>/edit">
+                <div class="edit-text">Edit <%= foundPlant.name %></div>
+            </a>
+        </div>
+</html>
